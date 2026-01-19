@@ -35,10 +35,10 @@ removeBtn.addEventListener("click", async () => {
   beforeImg.style.display = "none";
   afterImg.style.display = "none";
 
-  // Step 1: Resize image before sending
-  const resizedFile = await resizeImage(file, 1200);
+  // Resize before sending (fast)
+  const resizedFile = await resizeImage(file, 1000);
 
-  const apiKey = "frxfoPpbGSakYHBT8uV8igQ1"; // <-- API key
+  const apiKey = "frxfoPpbGSakYHBT8uV8igQ1";
 
   const formData = new FormData();
   formData.append("image_file", resizedFile);
@@ -67,7 +67,6 @@ removeBtn.addEventListener("click", async () => {
     resultUrl = URL.createObjectURL(blob);
     afterImg.src = resultUrl;
 
-    // show toggle buttons
     toggleButtons.style.display = "flex";
     showAfter();
 
