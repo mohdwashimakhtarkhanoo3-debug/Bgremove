@@ -63,6 +63,11 @@ p {
   color: rgba(255,255,255,0.7);
 }
 
+/* ===== Hide Default File Input ===== */
+#fileInput {
+  display: none;
+}
+
 .buttons {
   display: flex;
   gap: 12px;
