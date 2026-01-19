@@ -9,13 +9,18 @@
 <body>
   <div class="container">
     <h1>Background Remove</h1>
+    <p>Upload an image and remove the background instantly.</p>
 
+    <label class="custom-file" for="fileInput">Choose Photo</label>
     <input type="file" id="fileInput" accept="image/*" />
-    <button id="removeBtn">Remove Background</button>
 
+    <div class="buttons">
+      <button id="removeBtn">Remove Background</button>
+      <button id="downloadBtn" style="display:none;">Download</button>
+    </div>
+
+    <div class="loader" id="loader"></div>
     <div id="result"></div>
-    <button id="downloadBtn" style="display:none;">Download Result</button>
-
     <p id="status"></p>
   </div>
 
