@@ -3,6 +3,7 @@ const removeBtn = document.getElementById("removeBtn");
 const result = document.getElementById("result");
 const downloadBtn = document.getElementById("downloadBtn");
 const status = document.getElementById("status");
+const loader = document.getElementById("loader");
 
 let resultUrl = "";
 
@@ -10,7 +11,8 @@ removeBtn.addEventListener("click", async () => {
   const file = fileInput.files[0];
   if (!file) return alert("Please select an image");
 
-  status.innerText = "Processing...";
+  status.innerText = "";
+  loader.style.display = "block";
 
   const apiKey = "frxfoPpbGSakYHBT8uV8igQ1"; // <-- Yahan apni API key daalo
 
@@ -26,6 +28,8 @@ removeBtn.addEventListener("click", async () => {
       body: formData
     });
 
+    loader.style.display = "none";
+
     if (!response.ok) {
       status.innerText = "Error: API request failed.";
       return;
@@ -38,6 +42,7 @@ removeBtn.addEventListener("click", async () => {
     downloadBtn.style.display = "block";
     status.innerText = "Background removed successfully!";
   } catch (error) {
+    loader.style.display = "none";
     status.innerText = "Error: Something went wrong.";
     console.error(error);
   }
