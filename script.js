@@ -1,6 +1,5 @@
 const fileInput = document.getElementById("fileInput");
 const removeBtn = document.getElementById("removeBtn");
-const result = document.getElementById("result");
 const downloadBtn = document.getElementById("downloadBtn");
 const status = document.getElementById("status");
 const loader = document.getElementById("loader");
@@ -36,10 +35,13 @@ removeBtn.addEventListener("click", async () => {
   beforeImg.style.display = "none";
   afterImg.style.display = "none";
 
+  // Step 1: Resize image before sending
+  const resizedFile = await resizeImage(file, 1200);
+
   const apiKey = "frxfoPpbGSakYHBT8uV8igQ1"; // <-- API key
 
   const formData = new FormData();
-  formData.append("image_file", file);
+  formData.append("image_file", resizedFile);
   formData.append("size", "auto");
   formData.append("type", "product");
   formData.append("format", "png");
@@ -67,8 +69,6 @@ removeBtn.addEventListener("click", async () => {
 
     // show toggle buttons
     toggleButtons.style.display = "flex";
-
-    // show After image by default
     showAfter();
 
     downloadBtn.style.display = "block";
@@ -99,3 +99,25 @@ downloadBtn.addEventListener("click", () => {
   a.download = "bg_removed_hd.png";
   a.click();
 });
+
+// Resize function
+function resizeImage(file, maxWidth) {
+  return new Promise((resolve) => {
+    const img = new Image();
+    img.onload = () => {
+      const canvas = document.createElement("canvas");
+      const scale = Math.min(1, maxWidth / img.width);
+      canvas.width = img.width * scale;
+      canvas.height = img.height * scale;
+
+      const ctx = canvas.getContext("2d");
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+      canvas.toBlob((blob) => {
+        const resizedFile = new File([blob], file.name, { type: "image/jpeg" });
+        resolve(resizedFile);
+      }, "image/jpeg", 0.9);
+    };
+    img.src = URL.createObjectURL(file);
+  });
+}
