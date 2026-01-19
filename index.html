@@ -11,10 +11,10 @@
     <h1>ShoRemover</h1>
     <p>Upload image, remove background in HD, then compare Before/After.</p>
 
-    <!-- Hidden file input (outside label) -->
+    <!-- hidden file input -->
     <input type="file" id="fileInput" accept="image/*" />
 
-    <!-- Custom button -->
+    <!-- custom button -->
     <label class="custom-file" for="fileInput">
       Choose Photo
       <div class="file-name" id="fileName">No file chosen</div>
@@ -25,7 +25,7 @@
       <button id="downloadBtn" style="display:none;">Download</button>
     </div>
 
-    <div class="toggleButtons" style="display:none;">
+    <div class="toggleButtons" id="toggleButtons" style="display:none;">
       <button id="beforeBtn">Before</button>
       <button id="afterBtn">After</button>
     </div>
