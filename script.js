@@ -4,8 +4,14 @@ const result = document.getElementById("result");
 const downloadBtn = document.getElementById("downloadBtn");
 const status = document.getElementById("status");
 const loader = document.getElementById("loader");
+const fileName = document.getElementById("fileName");
 
 let resultUrl = "";
+
+fileInput.addEventListener("change", () => {
+  const file = fileInput.files[0];
+  fileName.innerText = file ? file.name : "No file chosen";
+});
 
 removeBtn.addEventListener("click", async () => {
   const file = fileInput.files[0];
@@ -13,11 +19,18 @@ removeBtn.addEventListener("click", async () => {
 
   status.innerText = "";
   loader.style.display = "block";
+  downloadBtn.style.display = "none";
+  result.innerHTML = "";
 
   const apiKey = "frxfoPpbGSakYHBT8uV8igQ1"; // <-- Yahan apni API key daalo
 
   const formData = new FormData();
   formData.append("image_file", file);
+
+  // HD options
+  formData.append("size", "auto");   // HD quality
+  formData.append("type", "product"); // best cut
+  formData.append("format", "png");
 
   try {
     const response = await fetch("https://api.remove.bg/v1.0/removebg", {
@@ -31,7 +44,8 @@ removeBtn.addEventListener("click", async () => {
     loader.style.display = "none";
 
     if (!response.ok) {
-      status.innerText = "Error: API request failed.";
+      const err = await response.json();
+      status.innerText = "Error: " + (err.errors ? err.errors[0].title : "API request failed.");
       return;
     }
 
@@ -40,7 +54,7 @@ removeBtn.addEventListener("click", async () => {
 
     result.innerHTML = `<img src="${resultUrl}" alt="Result">`;
     downloadBtn.style.display = "block";
-    status.innerText = "Background removed successfully!";
+    status.innerText = "Background removed successfully in HD!";
   } catch (error) {
     loader.style.display = "none";
     status.innerText = "Error: Something went wrong.";
@@ -51,6 +65,6 @@ removeBtn.addEventListener("click", async () => {
 downloadBtn.addEventListener("click", () => {
   const a = document.createElement("a");
   a.href = resultUrl;
-  a.download = "bg_removed.png";
+  a.download = "bg_removed_hd.png";
   a.click();
 });
