@@ -3,24 +3,37 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SHOAIB BACKGROUND REMOVER</title>
+  <title>ShoRemover</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <div class="container">
-    <h1>Shoaib Background Remover</h1>
-    <p>Upload an image and remove the background instantly.</p>
+    <h1>ShoRemover</h1>
+    <p>Upload image, remove background in HD, then compare Before/After.</p>
 
-    <label class="custom-file" for="fileInput">Choose Photo</label>
+    <label class="custom-file" for="fileInput">
+      Choose Photo
+      <div class="file-name" id="fileName">No file chosen</div>
+    </label>
     <input type="file" id="fileInput" accept="image/*" />
 
     <div class="buttons">
-      <button id="removeBtn">Remove Background</button>
+      <button id="removeBtn">Remove</button>
       <button id="downloadBtn" style="display:none;">Download</button>
     </div>
 
+    <div class="toggleButtons" style="display:none;">
+      <button id="beforeBtn">Before</button>
+      <button id="afterBtn">After</button>
+    </div>
+
     <div class="loader" id="loader"></div>
-    <div id="result"></div>
+
+    <div id="compare">
+      <img id="beforeImg" style="display:none;" />
+      <img id="afterImg" style="display:none;" />
+    </div>
+
     <p id="status"></p>
   </div>
 
