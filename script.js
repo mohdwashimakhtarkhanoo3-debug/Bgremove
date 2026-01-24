@@ -50,7 +50,7 @@ removeBtn.addEventListener("click", async () => {
     const response = await fetch("https://api.remove.bg/v1.0/removebg", {
       method: "POST",
       headers: {
-        "X-Api-Key": apiKey
+        "X-Api-Key": sandbox_sk_pr_wow_5bc39e6506292b82cc14caa32e606476b948c2b8
       },
       body: formData
     });
