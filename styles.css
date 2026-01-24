@@ -143,4 +143,26 @@ button:active{
 
 @keyframes spin{
   to{ transform: rotate(360deg); }
+/* Text select disable */
+* {
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Mobile long press disable */
+body {
+  -webkit-touch-callout: none;
+  overscroll-behavior: none;
+}
+
+/* Image save / drag disable */
+img {
+  pointer-events: none;
+  -webkit-user-drag: none;
+}
+
+/* Remove blue tap highlight (mobile) */
+button, a, input, label {
+  -webkit-tap-highlight-color: transparent;
 }
